@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>片岡HD コンテンツロードマップ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans+JP:wght@400;500;700&family=Shippori+Mincho+B1:wght@700;800&display=swap">
+<style>
+/* Layout: one reading column, same system as the funding and tech roadmaps; an audience ledger and a phase stepper carry the structure */
+:root {
+  --bg: #f4f6fa;
+  --surface: #ffffff;
+  --ink: #161b2c;
+  --muted: #586079;
+  --line: #dce1eb;
+  --accent: #0d6b66;
+  --accent-soft: #e3f1ef;
+  --signal: #c23a1e;
+  --signal-soft: #fbe9e4;
+  --font-display: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-body: "IBM Plex Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --step-0: 0.82rem;
+  --step-1: 0.94rem;
+  --step-2: 1.06rem;
+  --step-3: 1.4rem;
+  --step-4: 2.1rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f121b;
+    --surface: #161a26;
+    --ink: #e7e9f1;
+    --muted: #9aa1b9;
+    --line: #2a3043;
+    --accent: #56c3b9;
+    --accent-soft: #14302f;
+    --signal: #ff7d5e;
+    --signal-soft: #3a1c15;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f121b;
+  --surface: #161a26;
+  --ink: #e7e9f1;
+  --muted: #9aa1b9;
+  --line: #2a3043;
+  --accent: #56c3b9;
+  --accent-soft: #14302f;
+  --signal: #ff7d5e;
+  --signal-soft: #3a1c15;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-1);
+  line-height: 1.85;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 64px;
+  -webkit-text-size-adjust: 100%;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; }
+
+.page { max-width: 48rem; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+
+/* ---------- masthead ---------- */
+.masthead { display: flex; flex-direction: column; gap: 14px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.eyebrow { font-family: var(--font-mono); font-size: var(--step-0); letter-spacing: 0.06em; color: var(--muted); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: var(--step-4); line-height: 1.3; margin: 0; text-wrap: balance; letter-spacing: 0.02em; }
+.lead { font-size: var(--step-2); max-width: 40em; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: var(--step-0); color: var(--muted); }
+
+/* ---------- sections ---------- */
+section { display: flex; flex-direction: column; gap: 20px; }
+h2 { font-family: var(--font-display); font-weight: 700; font-size: var(--step-3); line-height: 1.4; margin: 0; text-wrap: balance; }
+h3 { font-size: var(--step-2); font-weight: 700; margin: 0; line-height: 1.5; }
+.section-note { color: var(--muted); font-size: var(--step-0); }
+.bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.bullets li { position: relative; padding-left: 1.1em; }
+.bullets li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+/* ---------- summary ---------- */
+.summary { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 28px; }
+.summary .bullets { gap: 14px; }
+.deadline-callout { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; border-top: 1px solid var(--line); padding-top: 18px; }
+.deadline-callout .label { font-size: var(--step-0); font-weight: 700; letter-spacing: 0.08em; color: var(--signal); }
+.deadline-callout .date { font-family: var(--font-mono); font-size: var(--step-2); color: var(--signal); }
+.deadline-callout .what { font-weight: 500; }
+
+/* ---------- ledgers (audience, pillars) ---------- */
+.ledger { list-style: none; border-top: 2px solid var(--ink); }
+.ledger-row { display: grid; grid-template-columns: 9.5em 1fr; gap: 0 18px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.mod { display: flex; flex-direction: column; line-height: 1.5; gap: 2px; }
+.mod .name { font-weight: 700; font-size: var(--step-2); }
+.mod .who { font-size: var(--step-0); color: var(--accent); font-weight: 700; }
+.mod .who.open { color: var(--signal); }
+.mod .freq { font-family: var(--font-mono); font-size: var(--step-0); color: var(--muted); }
+.detail { display: grid; grid-template-columns: 6.5em 1fr; gap: 2px 12px; min-width: 0; }
+.detail .k { font-size: var(--step-0); font-weight: 700; color: var(--muted); padding-top: 0.15em; }
+.detail .v { min-width: 0; }
+.floor-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; padding: 0 8px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); width: fit-content; }
+
+/* ---------- formats ---------- */
+.formats { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.formats li { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.formats .title { font-weight: 700; }
+.formats .why { font-size: var(--step-0); color: var(--muted); }
+.formats li.wide { grid-column: 1 / -1; }
+
+/* ---------- phase stepper ---------- */
+.stepper { list-style: none; display: flex; flex-direction: column; }
+.gate { display: grid; grid-template-columns: 44px 1fr; gap: 0 18px; position: relative; padding-bottom: 28px; }
+.gate:last-child { padding-bottom: 0; }
+.gate::before { content: ""; position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: var(--line); }
+.gate:last-child::before { display: none; }
+.gate-no { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-mono); font-size: var(--step-2); background: var(--accent-soft); color: var(--accent); border: 2px solid var(--accent); }
+.gate.is-now .gate-no { background: var(--accent); color: var(--surface); }
+.gate-body { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding-top: 6px; }
+.gate-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.gate-when { font-family: var(--font-mono); font-size: var(--step-0); color: var(--muted); }
+.gate-link { font-size: var(--step-0); color: var(--muted); }
+.gate-rows { display: grid; grid-template-columns: 5.5em 1fr; gap: 4px 12px; }
+.gate-rows .k { font-size: var(--step-0); font-weight: 700; color: var(--muted); padding-top: 0.15em; }
+.gate-rows .v { min-width: 0; }
+.now-tag { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; color: var(--surface); background: var(--accent); padding: 1px 8px; border-radius: 999px; }
+
+/* ---------- tables ---------- */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 30rem; font-size: var(--step-1); }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
+thead th { font-size: var(--step-0); color: var(--muted); font-weight: 700; background: var(--bg); }
+tbody th { font-weight: 700; white-space: nowrap; }
+td.when { font-family: var(--font-mono); font-size: var(--step-0); color: var(--muted); white-space: nowrap; }
+
+/* ---------- actions ---------- */
+.actions { list-style: none; border-top: 2px solid var(--ink); }
+.action { display: grid; grid-template-columns: 9em 1fr 7.5em; gap: 4px 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.action .who { font-weight: 700; }
+.action .who.open { color: var(--signal); }
+.action .due { font-family: var(--font-mono); font-size: var(--step-0); color: var(--muted); text-align: right; padding-top: 0.2em; }
+.action .task { min-width: 0; }
+
+footer { display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 1px solid var(--line); font-size: var(--step-0); color: var(--muted); }
+footer h2 { font-size: var(--step-2); color: var(--ink); }
+.refs { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.refs li { overflow-wrap: anywhere; }
+
+@media (max-width: 640px) {
+  body { padding-block: 24px 48px; }
+  .page { gap: 44px; }
+  .summary { padding: 20px; }
+  .ledger-row { grid-template-columns: 1fr; gap: 8px; }
+  .mod { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+  .detail { grid-template-columns: 1fr; gap: 0; }
+  .detail .v { margin-bottom: 6px; }
+  .formats { grid-template-columns: 1fr; }
+  .gate-rows { grid-template-columns: 1fr; gap: 0; }
+  .gate-rows .v { margin-bottom: 6px; }
+  .action { grid-template-columns: 1fr; }
+  .action .due { text-align: left; padding-top: 0; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <p class="eyebrow">#20-pj-kataoka-hd ／ メンバー向け資料</p>
+    <h1>片岡HD コンテンツロードマップ</h1>
+    <p class="lead">AI配信者の技術を広め，ファンと顧客を増やすための発信計画です．誰に，何を，どこで，いつ，誰が出すかをまとめました．</p>
+    <p class="meta"><span>2026年10月24日版</span><span>たたき台です．担当は次回のミーティングで確定します</span><span>関連：<a href="https://claude.ai/artifact/T2Fkk48ir3zPUoWU8WsbCb">資金ロードマップ</a>，<a href="https://claude.ai/artifact/A42mn48Zc4UzK8eTtGsgZR">技術ロードマップ</a></span></p>
+  </header>
+
+  <section class="summary" aria-labelledby="h-summary">
+    <h2 id="h-summary">まず押さえること</h2>
+    <ul class="bullets">
+      <li><strong>発信は5本の柱で組みます．</strong>本編配信，切り抜き，開発の裏側，研究・技術，法人向けです．エンタメ配信は見せ場とデータ集めの場，売上は法人向けで立てる「二階建て」に合わせます．</li>
+      <li><strong>広告より先に，草の根で数字を作ります．</strong>フォロワー，視聴維持率，問い合わせの数字が出た柱にだけ，あとから広告費を使います．</li>
+      <li><strong>AIであることは常に表示します．</strong>実在の人物と購入した素材は，許可とライセンスの範囲でだけ使います．</li>
+    </ul>
+    <div class="deadline-callout">
+      <span class="label">最初の区切り</span>
+      <span class="date">11月上旬</span>
+      <span class="what">川崎さんがYouTube・TikTok・Xのアカウントを開設します．TikTokのPC配信には運用30日以上が目安なので，早めに始めます．</span>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-audience">
+    <h2 id="h-audience">誰に何を届けるか</h2>
+    <p>相手ごとに，欲しいもの・届ける場所・取ってほしい行動が違います．同じ配信から，相手別に切り出して使い回します．</p>
+    <ol class="ledger">
+      <li class="ledger-row">
+        <div class="mod"><span class="name">視聴者</span><span class="floor-tag">1階：配信</span></div>
+        <div class="detail">
+          <span class="k">欲しいもの</span><span class="v">面白い配信と，参加できる企画</span>
+          <span class="k">届けるもの</span><span class="v">本編配信，切り抜きショート</span>
+          <span class="k">場所</span><span class="v">YouTube，TikTok</span>
+          <span class="k">取ってほしい行動</span><span class="v">チャンネル登録，常連になる</span>
+        </div>
+      </li>
+      <li class="ledger-row">
+        <div class="mod"><span class="name">技術者・研究者</span><span class="floor-tag">1階：配信</span></div>
+        <div class="detail">
+          <span class="k">欲しいもの</span><span class="v">仕組みと数字</span>
+          <span class="k">届けるもの</span><span class="v">開発の裏側，論文，学会発表，オープンソース</span>
+          <span class="k">場所</span><span class="v">X，note，GitHub，学会</span>
+          <span class="k">取ってほしい行動</span><span class="v">フォロー，共同研究や参加の申し出</span>
+        </div>
+      </li>
+      <li class="ledger-row">
+        <div class="mod"><span class="name">法人・自治体</span><span class="floor-tag">2階：売上</span></div>
+        <div class="detail">
+          <span class="k">欲しいもの</span><span class="v">費用対効果と導入事例</span>
+          <span class="k">届けるもの</span><span class="v">1分のデモ動画，事例，提案資料</span>
+          <span class="k">場所</span><span class="v">紹介，展示会，法人向けページ</span>
+          <span class="k">取ってほしい行動</span><span class="v">問い合わせ，有料PoC</span>
+        </div>
+      </li>
+      <li class="ledger-row">
+        <div class="mod"><span class="name">審査員・投資家</span><span class="floor-tag">2階：売上</span></div>
+        <div class="detail">
+          <span class="k">欲しいもの</span><span class="v">実績と伸び</span>
+          <span class="k">届けるもの</span><span class="v">上の柱の数字をまとめた資料</span>
+          <span class="k">場所</span><span class="v">1stRound，NEPなどの審査</span>
+          <span class="k">取ってほしい行動</span><span class="v">採択，出資</span>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="h-pillars">
+    <h2 id="h-pillars">5つのコンテンツの柱</h2>
+    <ol class="ledger">
+      <li class="ledger-row">
+        <div class="mod"><span class="name">本編配信</span><span class="freq">週2〜3回</span><span class="who">中本さん（キャラクター・台本）</span></div>
+        <div class="detail">
+          <span class="k">中身</span><span class="v">AIキャラの配信．1回1〜3時間から始めて，技術の目標に合わせて延ばす</span>
+          <span class="k">ねらい</span><span class="v">ファンづくりと，介入・視聴のデータ集め</span>
+        </div>
+      </li>
+      <li class="ledger-row">
+        <div class="mod"><span class="name">切り抜きショート</span><span class="freq">毎日1本</span><span class="who">國領さん（制作）・川崎さん（投稿）</span></div>
+        <div class="detail">
+          <span class="k">中身</span><span class="v">配信から見どころを自動で切り出し，TikTokとYouTubeショートに出す．切り抜きの試作はすでにある</span>
+          <span class="k">ねらい</span><span class="v">新しい視聴者の入口．フォロワーを増やす</span>
+        </div>
+      </li>
+      <li class="ledger-row">
+        <div class="mod"><span class="name">開発の裏側</span><span class="freq">週1本</span><span class="who">各部品の担当が持ち回り</span></div>
+        <div class="detail">
+          <span class="k">中身</span><span class="v">人がどう作っているかを見せる短い記事や動画．各担当が自分の部品について書く</span>
+          <span class="k">ねらい</span><span class="v">AIだけでは薄れがちな「人の苦労」を見せる．書くこと自体がチーム内の知識共有にもなる</span>
+        </div>
+      </li>
+      <li class="ledger-row">
+        <div class="mod"><span class="name">研究・技術</span><span class="freq">節目ごと</span><span class="who">片岡くん（取りまとめ）</span></div>
+        <div class="detail">
+          <span class="k">中身</span><span class="v">学会発表，論文，発表の配信や解説記事．論文発表後は，Apacheライセンスでのオープンソース公開を検討する</span>
+          <span class="k">ねらい</span><span class="v">技術の信頼性を示し，技術者・研究者の仲間を増やす</span>
+        </div>
+      </li>
+      <li class="ledger-row">
+        <div class="mod"><span class="name">法人向け</span><span class="freq">フェーズ2から</span><span class="who">佐藤くん</span></div>
+        <div class="detail">
+          <span class="k">中身</span><span class="v">1分のデモ動画，提案資料，PoC先の事例ページ</span>
+          <span class="k">ねらい</span><span class="v">問い合わせと有料PoCにつなげる．審査資料にもそのまま使う</span>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="h-owners">
+    <h2 id="h-owners">一人ひとりの担当</h2>
+    <p>コンテンツの担当は，一人が一つの領域をまるごと持ちます．担当することだけでなく，自分で決めてよいことと，自分で追う数字もはっきりさせます．</p>
+    <ol class="ledger">
+      <li class="ledger-row">
+        <div class="mod"><span class="name">キャラクターと台本</span><span class="who">中本さん</span></div>
+        <div class="detail">
+          <span class="k">担当すること</span><span class="v">キャラ設定書，毎回の配信のテーマと台本，企画の中身</span>
+          <span class="k">決めてよいこと</span><span class="v">キャラの口調・設定・話さないこと，配信のテーマ</span>
+          <span class="k">追う数字</span><span class="v">視聴維持率，コメント数</span>
+          <span class="k">相棒</span><span class="v">片岡くん（設定をAIの人格に反映する）</span>
+        </div>
+      </li>
+      <li class="ledger-row">
+        <div class="mod"><span class="name">SNS運用</span><span class="who">川崎さん</span></div>
+        <div class="detail">
+          <span class="k">担当すること</span><span class="v">YouTube・TikTok・Xのアカウント運営，切り抜きの投稿，コメントへの対応，数字の週報．片岡くんから引き継ぎます</span>
+          <span class="k">決めてよいこと</span><span class="v">投稿の時間と文面，どの切り抜きを出すか</span>
+          <span class="k">追う数字</span><span class="v">フォロワーの増加，再生数</span>
+          <span class="k">相棒</span><span class="v">國領さん（切り抜きとサムネイルを作る）</span>
+        </div>
+      </li>
+      <li class="ledger-row">
+        <div class="mod"><span class="name">動画とデザイン</span><span class="who">國領さん</span></div>
+        <div class="detail">
+          <span class="k">担当すること</span><span class="v">デモ動画，サムネイル，切り抜き編集の型</span>
+          <span class="k">決めてよいこと</span><span class="v">見た目のトーン（色・フォント・サムネイルの型）</span>
+          <span class="k">追う数字</span><span class="v">サムネイルのクリック率</span>
+          <span class="k">相棒</span><span class="v">川崎さん（作った動画を届ける）</span>
+        </div>
+      </li>
+      <li class="ledger-row">
+        <div class="mod"><span class="name">法人向けと計測</span><span class="who">佐藤くん</span></div>
+        <div class="detail">
+          <span class="k">担当すること</span><span class="v">発信ルール，数字のシート，法人向けの資料</span>
+          <span class="k">決めてよいこと</span><span class="v">法人向けの提案の形</span>
+          <span class="k">追う数字</span><span class="v">問い合わせ数，商談数</span>
+          <span class="k">相棒</span><span class="v">小板（法人の紹介）</span>
+        </div>
+      </li>
+    </ol>
+    <h3>チームの一員として動くために</h3>
+    <ul class="bullets">
+      <li><strong>打合せのたびに，一人5分の報告枠を設けます．</strong>自分の数字と，次にやることを話します．</li>
+      <li><strong>「開発の裏側」の持ち回りに全員が入ります．</strong>キャラづくりやSNS運用の工夫も，裏側として発信できます．</li>
+      <li><strong>資料や発表には，担当として名前を載せます．</strong>審査や学会の発表資料にも担当を明記します．</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-formats">
+    <h2 id="h-formats">企画のタネ</h2>
+    <p>チャンネルの議論で出た案です．どれも研究（人の介入，複数キャラの同時運用）の見せ場を兼ねています．</p>
+    <ul class="formats">
+      <li><span class="title">どこからAI？クイズ</span><span>配信の途中からAIに切り替え，視聴者が切り替わった場所を当てる．</span><span class="why">AIが登場することは最初に告知し，答え合わせで明かします．</span></li>
+      <li><span class="title">キャラの掛け合い</span><span>複数のキャラが同時に出演して会話する．</span><span class="why">1人で複数体を回すHITLの見せ場です．</span></li>
+      <li><span class="title">AI視聴者</span><span>複数のAIが常連のようにコメントし，場を温める．</span><span class="why">視聴者が少ない立ち上げ期にも配信が成り立ちます．</span></li>
+      <li><span class="title">開発者が乱入</span><span>開発メンバーが途中で介入する回．</span><span class="why">人の介入の見せ方を試す実験を兼ねます．</span></li>
+      <li class="wide"><span class="title">小板AIの質問配信</span><span>研究室の先生のAIが，視聴者の質問に答える．試作済みの小板AIを使います．</span><span class="why">大学や研究室の広報にもなり，教育分野の法人向け事例にもつながります．</span></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-phases">
+    <h2 id="h-phases">コンテンツロードマップ</h2>
+    <p>技術ロードマップのフェーズと同じ区切りにしています．</p>
+    <ol class="stepper">
+      <li class="gate is-now">
+        <span class="gate-no" aria-hidden="true">0</span>
+        <div class="gate-body">
+          <div class="gate-head"><h3>土台づくり</h3><span class="gate-when">〜2026年11月中旬</span><span class="now-tag">いまここ</span></div>
+          <div class="gate-rows">
+            <span class="k">やること</span><span class="v">キャラ設定書（名前・世界観・口調・話さないこと），アバターと声のライセンス確認，アカウント開設，発信ルールの決定，1stRound用のデモ動画1本</span>
+            <span class="k">終わりの目安</span><span class="v">アカウントとキャラ設定書が揃い，発信ルールを全員が知っている</span>
+          </div>
+        </div>
+      </li>
+      <li class="gate">
+        <span class="gate-no" aria-hidden="true">1</span>
+        <div class="gate-body">
+          <div class="gate-head"><h3>定期配信</h3><span class="gate-when">〜2026年12月</span><span class="gate-link">技術MVPと同時期</span></div>
+          <div class="gate-rows">
+            <span class="k">やること</span><span class="v">YouTube Liveで週2〜3回の定期配信，切り抜きを毎日，開発の裏側を週1本，数字の計測開始</span>
+            <span class="k">終わりの目安</span><span class="v">定期配信が4週続く．TikTokのフォロワーがPC配信の目安の1,000人に届く</span>
+          </div>
+        </div>
+      </li>
+      <li class="gate">
+        <span class="gate-no" aria-hidden="true">2</span>
+        <div class="gate-body">
+          <div class="gate-head"><h3>企画と事例</h3><span class="gate-when">〜2027年3月</span><span class="gate-link">HITLと同時期</span></div>
+          <div class="gate-rows">
+            <span class="k">やること</span><span class="v">企画シリーズ（クイズ，掛け合い），他の配信者とのコラボ，全国大会の発表を配信と記事に，法人向けのデモ動画と提案資料，PoC先の事例</span>
+            <span class="k">終わりの目安</span><span class="v">法人との商談が始まり，紹介できる事例が1件ある</span>
+          </div>
+        </div>
+      </li>
+      <li class="gate">
+        <span class="gate-no" aria-hidden="true">3</span>
+        <div class="gate-body">
+          <div class="gate-head"><h3>広げる</h3><span class="gate-when">会社設立後</span><span class="gate-link">製品化と同時期</span></div>
+          <div class="gate-rows">
+            <span class="k">やること</span><span class="v">法人向けページ，展示会への出展，オープンソース公開（論文発表後），数字の出ている柱に絞った広告のテスト，メディアへの露出</span>
+            <span class="k">終わりの目安</span><span class="v">法人の問い合わせが継続して入る</span>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="h-kpi">
+    <h2 id="h-kpi">測る数字</h2>
+    <p>数字は計測の担当（佐藤くん）が1枚のシートにまとめます．資金の審査資料にもそのまま使います．</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">柱</th><th scope="col">数字</th><th scope="col">見る頻度</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">本編配信</th><td>同時接続数，視聴維持率，コメント数</td><td class="when">毎回</td></tr>
+          <tr><th scope="row">切り抜き</th><td>再生数，フォロワーの増加</td><td class="when">週1回</td></tr>
+          <tr><th scope="row">開発の裏側</th><td>表示回数，フォロー数</td><td class="when">週1回</td></tr>
+          <tr><th scope="row">研究・技術</th><td>発表数，GitHubのスター数，問い合わせ</td><td class="when">節目ごと</td></tr>
+          <tr><th scope="row">法人向け</th><td>問い合わせ数，商談数</td><td class="when">月1回</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-budget">
+    <h2 id="h-budget">お金とアカウントの考え方</h2>
+    <ul class="bullets">
+      <li><strong>当面は研究費の範囲で進めます．</strong>有料広告は，フェーズ3で数字の出ている柱に絞って試します．</li>
+      <li><strong>フォロワー付きのアカウントは買いません．</strong>SNSの規約に反するおそれがあり，凍結されると積み上げたものがすべて消えます．</li>
+      <li><strong>TikTokの配信条件は正攻法で届きます．</strong>スマホからの配信は18歳以上・フォロワー50人以上，PC配信（LIVE Studio）はフォロワー1,000人以上と運用30日以上が目安です．それまではYouTube Liveを本編の場にします．</li>
+    </ul>
+    <p class="section-note">配信の条件は変わることがあるので，開設時に各サービスで確認してください．</p>
+  </section>
+
+  <section aria-labelledby="h-rules">
+    <h2 id="h-rules">発信のルール</h2>
+    <ul class="bullets">
+      <li><strong>AIであることを常に表示します．</strong>チャンネルの説明，配信画面，概要欄に書きます．YouTubeは本物らしく見える合成コンテンツに開示を求めていて，開示しないと削除や収益化の停止もありえます．</li>
+      <li><strong>実在の人物は，書面の許可の範囲でだけ使います．</strong>有名人の話し方を真似る企画は，許可がなければ行いません．</li>
+      <li><strong>購入したアバターと声は，ライセンスを確認してから使います．</strong>商用利用，配信，AIでの利用が許されているかを確かめます．</li>
+      <li><strong>AIの不適切な発言に備えます．</strong>話さないことの一覧と，人が見張る体制を置きます．人の介入の仕組みが，そのまま安全装置になります．</li>
+      <li><strong>プロジェクトのアカウントで発信します．</strong>メンバー個人のアカウントや個人情報は使いません．</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-actions">
+    <h2 id="h-actions">次のアクション</h2>
+    <p class="section-note">担当は案です．次回のミーティングで確定させてください．</p>
+    <ol class="actions">
+      <li class="action"><span class="who">川崎さん</span><span class="task">YouTube・TikTok・Xのプロジェクト用アカウントを開設し，運用を始める</span><span class="due">11月上旬</span></li>
+      <li class="action"><span class="who">中本さん</span><span class="task">キャラ設定書（名前・世界観・口調・話さないこと）を作り，片岡くんとAIの人格に反映する</span><span class="due">11月中旬</span></li>
+      <li class="action"><span class="who">國領さん</span><span class="task">1stRound用のデモ動画と，サムネイル・切り抜き編集の型を作る</span><span class="due">11月中旬</span></li>
+      <li class="action"><span class="who">佐藤くん</span><span class="task">発信ルールと，数字をまとめるシートを作る</span><span class="due">11月中旬</span></li>
+      <li class="action"><span class="who">片岡くん</span><span class="task">切り抜きの自動生成を定期配信に組み込む</span><span class="due">12月</span></li>
+      <li class="action"><span class="who">小板</span><span class="task">アバター・声のライセンスと実在人物の許可を確認し，大学の広報との連携を相談する</span><span class="due">11月中</span></li>
+      <li class="action"><span class="who">川崎さん</span><span class="task">数字の週報を始め，打合せで報告する</span><span class="due">12月</span></li>
+    </ol>
+  </section>
+
+  <footer>
+    <h2>参照</h2>
+    <p>チャンネル内の議論：9/20，9/26，10/4，10/9，10/16のハドル議事録とスレッド．</p>
+    <ul class="refs">
+      <li><a href="https://www.luft.co.jp/media/tiktok-live-conditions/">TikTok LIVEの配信条件（ルフト・メディア）</a></li>
+      <li><a href="https://9to5google.com/2024/03/18/youtube-altered-content-disclosure/">YouTubeの合成コンテンツ開示ルール（9to5Google）</a></li>
+    </ul>
+  </footer>
+
+</div>
+</body>
+</html>
