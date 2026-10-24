@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans+JP:wght@400;500;700&family=Shippori+Mincho+B1:wght@700;800&display=swap">
 <style>
-/* Layout: one reading column; a vertical gate stepper and a dated deadline ledger carry the structure */
+/* Layout: one reading column; a figure row for unit economics, a vertical gate stepper and a dated deadline ledger carry the structure */
 :root {
   --bg: #f4f6fa;
   --surface: #ffffff;
@@ -34,42 +34,23 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0f121b;
-    --surface: #161a26;
-    --ink: #e7e9f1;
-    --muted: #9aa1b9;
-    --line: #2a3043;
-    --accent: #56c3b9;
-    --accent-soft: #14302f;
-    --signal: #ff7d5e;
-    --signal-soft: #3a1c15;
-    --chip-research: #a9adf0;
-    --chip-research-soft: #23264a;
+    --bg: #0f121b; --surface: #161a26; --ink: #e7e9f1; --muted: #9aa1b9; --line: #2a3043;
+    --accent: #56c3b9; --accent-soft: #14302f; --signal: #ff7d5e; --signal-soft: #3a1c15;
+    --chip-research: #a9adf0; --chip-research-soft: #23264a;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0f121b;
-  --surface: #161a26;
-  --ink: #e7e9f1;
-  --muted: #9aa1b9;
-  --line: #2a3043;
-  --accent: #56c3b9;
-  --accent-soft: #14302f;
-  --signal: #ff7d5e;
-  --signal-soft: #3a1c15;
-  --chip-research: #a9adf0;
-  --chip-research-soft: #23264a;
+  --bg: #0f121b; --surface: #161a26; --ink: #e7e9f1; --muted: #9aa1b9; --line: #2a3043;
+  --accent: #56c3b9; --accent-soft: #14302f; --signal: #ff7d5e; --signal-soft: #3a1c15;
+  --chip-research: #a9adf0; --chip-research-soft: #23264a;
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: var(--step-1);
-  line-height: 1.85;
+  background: var(--bg); color: var(--ink); font-family: var(--font-body);
+  font-size: var(--step-1); line-height: 1.85;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 40px 64px;
@@ -79,131 +60,60 @@ a { color: var(--accent); text-underline-offset: 3px; }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
 p { margin: 0; }
 ul, ol { margin: 0; padding: 0; }
+.page { max-width: 48rem; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
 
-.page {
-  max-width: 48rem;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 56px;
-}
-
-/* ---------- masthead ---------- */
 .masthead { display: flex; flex-direction: column; gap: 14px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: var(--step-0);
-  letter-spacing: 0.06em;
-  color: var(--muted);
-}
-h1 {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: var(--step-4);
-  line-height: 1.3;
-  margin: 0;
-  text-wrap: balance;
-  letter-spacing: 0.02em;
-}
+.eyebrow { font-family: var(--font-mono); font-size: var(--step-0); letter-spacing: 0.06em; color: var(--muted); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: var(--step-4); line-height: 1.3; margin: 0; text-wrap: balance; letter-spacing: 0.02em; }
 .lead { font-size: var(--step-2); max-width: 40em; }
 .meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: var(--step-0); color: var(--muted); }
 
-/* ---------- section scaffolding ---------- */
 section { display: flex; flex-direction: column; gap: 20px; }
-h2 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--step-3);
-  line-height: 1.4;
-  margin: 0;
-  text-wrap: balance;
-}
-h3 {
-  font-size: var(--step-2);
-  font-weight: 700;
-  margin: 0;
-  line-height: 1.5;
-}
+h2 { font-family: var(--font-display); font-weight: 700; font-size: var(--step-3); line-height: 1.4; margin: 0; text-wrap: balance; }
+h3 { font-size: var(--step-2); font-weight: 700; margin: 0; line-height: 1.5; }
 .section-note { color: var(--muted); font-size: var(--step-0); }
 .bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .bullets li { position: relative; padding-left: 1.1em; }
-.bullets li::before {
-  content: ""; position: absolute; left: 0; top: 0.8em;
-  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
-}
+.bullets li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 
-/* ---------- summary ---------- */
-.summary {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 28px;
-}
+.summary { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 28px; }
 .summary .bullets { gap: 14px; }
-.summary strong { font-weight: 700; }
-.deadline-callout {
-  display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px;
-  border-top: 1px solid var(--line);
-  padding-top: 18px;
-}
-.deadline-callout .label {
-  font-size: var(--step-0); font-weight: 700; letter-spacing: 0.08em;
-  color: var(--signal);
-}
+.deadline-callout { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; border-top: 1px solid var(--line); padding-top: 18px; }
+.deadline-callout .label { font-size: var(--step-0); font-weight: 700; letter-spacing: 0.08em; color: var(--signal); }
 .deadline-callout .date { font-family: var(--font-mono); font-size: var(--step-2); color: var(--signal); }
 .deadline-callout .what { font-weight: 500; }
 
-/* ---------- status board (現状) ---------- */
-.status-board { display: grid; grid-template-columns: 6.5em 1fr; border-top: 1px solid var(--line); }
+.status-board { display: grid; grid-template-columns: 6.5em 1fr; border-top: 1px solid var(--line); margin: 0; }
 .status-board dt, .status-board dd { margin: 0; padding: 14px 0; border-bottom: 1px solid var(--line); }
 .status-board dt { font-weight: 700; color: var(--accent); }
 .status-board dd { min-width: 0; }
 
-/* ---------- gate stepper ---------- */
+/* unit economics figures */
+.figures { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.fig { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.fig .num { font-family: var(--font-mono); font-size: 1.9rem; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.fig .num.open { color: var(--signal); }
+.fig .unit { font-family: var(--font-body); font-size: var(--step-1); margin-left: 4px; }
+.fig .lbl { font-weight: 700; }
+.fig .sub { font-size: var(--step-0); color: var(--muted); line-height: 1.6; }
+
 .stepper { list-style: none; display: flex; flex-direction: column; }
 .gate { display: grid; grid-template-columns: 44px 1fr; gap: 0 18px; position: relative; padding-bottom: 28px; }
 .gate:last-child { padding-bottom: 0; }
-.gate::before {
-  content: ""; position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: var(--line);
-}
+.gate::before { content: ""; position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: var(--line); }
 .gate:last-child::before { display: none; }
-.gate-no {
-  width: 44px; height: 44px; border-radius: 50%;
-  display: grid; place-items: center;
-  font-family: var(--font-mono); font-size: var(--step-2);
-  background: var(--accent-soft); color: var(--accent);
-  border: 2px solid var(--accent);
-}
+.gate-no { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-mono); font-size: var(--step-2); background: var(--accent-soft); color: var(--accent); border: 2px solid var(--accent); }
+.gate.is-now .gate-no { background: var(--accent); color: var(--surface); }
 .gate-body { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding-top: 6px; }
 .gate-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
 .gate-when { font-family: var(--font-mono); font-size: var(--step-0); color: var(--muted); }
 .gate-rows { display: grid; grid-template-columns: 4.5em 1fr; gap: 4px 12px; }
 .gate-rows .k { font-size: var(--step-0); font-weight: 700; color: var(--muted); padding-top: 0.15em; }
 .gate-rows .v { min-width: 0; }
-.gate.is-now .gate-no { background: var(--accent); color: var(--surface); }
-.now-tag {
-  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
-  color: var(--surface); background: var(--accent);
-  padding: 1px 8px; border-radius: 999px;
-}
+.now-tag { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; color: var(--surface); background: var(--accent); padding: 1px 8px; border-radius: 999px; }
 
-/* ---------- log spec ---------- */
-.log-spec {
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;
-  list-style: none;
-}
-.log-spec li {
-  border: 1px solid var(--line); border-radius: 8px; background: var(--surface);
-  padding: 12px 14px; font-size: var(--step-1);
-}
-.log-spec .tag { display: block; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em; }
-
-/* ---------- deadline ledger ---------- */
 .ledger { list-style: none; border-top: 2px solid var(--ink); }
-.ledger-row {
-  display: grid; grid-template-columns: 7.2em 1fr; gap: 0 18px;
-  padding: 18px 0; border-bottom: 1px solid var(--line);
-}
+.ledger-row { display: grid; grid-template-columns: 7.2em 1fr; gap: 0 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
 .ledger-row.is-urgent .when .date { color: var(--signal); }
 .when { display: flex; flex-direction: column; line-height: 1.35; }
 .when .date { font-family: var(--font-mono); font-size: var(--step-2); font-variant-numeric: tabular-nums; }
@@ -211,16 +121,10 @@ h3 {
 .what { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .what-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
 .what-head .name { font-weight: 700; font-size: var(--step-2); }
-.chip {
-  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
-  padding: 1px 8px; border-radius: 4px; white-space: nowrap;
-}
+.chip { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; padding: 1px 8px; border-radius: 4px; white-space: nowrap; }
 .chip.money { background: var(--accent-soft); color: var(--accent); }
 .chip.research { background: var(--chip-research-soft); color: var(--chip-research); }
-.status {
-  font-size: 0.72rem; font-weight: 500; padding: 0 8px; border-radius: 999px;
-  border: 1px solid var(--line); color: var(--muted); white-space: nowrap;
-}
+.status { font-size: 0.72rem; font-weight: 500; padding: 0 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
 .status.fixed { border-color: var(--signal); color: var(--signal); background: var(--signal-soft); }
 .amount { font-weight: 500; }
 .note { color: var(--muted); font-size: var(--step-0); line-height: 1.75; }
@@ -228,37 +132,25 @@ h3 {
 .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .two-col > div { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 
-/* ---------- cost table ---------- */
 .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
-table { border-collapse: collapse; width: 100%; min-width: 22rem; font-size: var(--step-1); }
+table { border-collapse: collapse; width: 100%; min-width: 26rem; font-size: var(--step-1); }
 th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
-tr:last-child td { border-bottom: none; }
-th { font-size: var(--step-0); color: var(--muted); font-weight: 700; background: var(--bg); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
+thead th { font-size: var(--step-0); color: var(--muted); font-weight: 700; background: var(--bg); }
+tbody th { font-weight: 700; white-space: nowrap; }
 td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 .priority { list-style: none; counter-reset: p; display: flex; flex-direction: column; gap: 12px; }
 .priority li { counter-increment: p; display: grid; grid-template-columns: 2em 1fr; gap: 0 10px; }
-.priority li::before {
-  content: counter(p); font-family: var(--font-mono); color: var(--accent);
-  font-size: var(--step-2); line-height: 1.6;
-}
+.priority li::before { content: counter(p); font-family: var(--font-mono); color: var(--accent); font-size: var(--step-2); line-height: 1.6; }
 .priority li > div { min-width: 0; }
 
-/* ---------- edge (勝ち筋) ---------- */
-.floors { display: grid; grid-template-columns: 1fr; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); }
-.floor { display: grid; grid-template-columns: 6.5em 1fr; gap: 0 16px; padding: 16px 20px; }
-.floor + .floor { border-top: 1px solid var(--line); }
-.floor .lvl { font-family: var(--font-display); font-weight: 700; color: var(--accent); }
-.floor > div { min-width: 0; }
-
-/* ---------- actions ---------- */
 .actions { list-style: none; border-top: 2px solid var(--ink); }
 .action { display: grid; grid-template-columns: 9em 1fr 7.5em; gap: 4px 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
 .action .who { font-weight: 700; }
 .action .due { font-family: var(--font-mono); font-size: var(--step-0); color: var(--muted); text-align: right; padding-top: 0.2em; }
 .action .task { min-width: 0; }
 
-/* ---------- footer ---------- */
 footer { display: flex; flex-direction: column; gap: 14px; padding-top: 24px; border-top: 1px solid var(--line); font-size: var(--step-0); color: var(--muted); }
 footer h2 { font-size: var(--step-2); color: var(--ink); }
 .refs { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 20px; }
@@ -271,13 +163,12 @@ footer h2 { font-size: var(--step-2); color: var(--ink); }
   .status-board { grid-template-columns: 1fr; }
   .status-board dt { padding-bottom: 0; border-bottom: none; }
   .status-board dd { padding-top: 2px; }
+  .figures { grid-template-columns: 1fr; }
   .gate-rows { grid-template-columns: 1fr; gap: 0; }
   .gate-rows .v { margin-bottom: 6px; }
-  .log-spec { grid-template-columns: 1fr; }
   .ledger-row { grid-template-columns: 1fr; gap: 6px; }
   .when { flex-direction: row; align-items: baseline; gap: 8px; }
   .two-col { grid-template-columns: 1fr; }
-  .floor { grid-template-columns: 1fr; gap: 4px; }
   .action { grid-template-columns: 1fr; }
   .action .due { text-align: left; padding-top: 0; }
   .refs { grid-template-columns: 1fr; }
@@ -293,14 +184,14 @@ footer h2 { font-size: var(--step-2); color: var(--ink); }
     <p class="eyebrow">#20-pj-kataoka-hd ／ メンバー向け資料</p>
     <h1>片岡HD 資金ロードマップ</h1>
     <p class="lead">AI配信者プロジェクトを事業として大きくするために，いつ・どこに・どれだけお金を入れるか．その方針と，当面使える資金の選択肢をまとめました．</p>
-    <p class="meta"><span>2026年10月24日版</span><span>たたき台です．ロードマップづくりの材料にしてください</span><span>関連：<a href="https://claude.ai/artifact/A42mn48Zc4UzK8eTtGsgZR">技術ロードマップ</a>，<a href="https://claude.ai/artifact/G4DLeaveLGzfKaCbhRqvFf">コンテンツロードマップ</a></span></p>
+    <p class="meta"><span>2026年10月24日版（片岡くんの計画資料「AI配信者」10/20を反映）</span><span>たたき台です．ロードマップづくりの材料にしてください</span><span>関連：<a href="https://claude.ai/artifact/A42mn48Zc4UzK8eTtGsgZR">技術ロードマップ</a>，<a href="https://claude.ai/artifact/G4DLeaveLGzfKaCbhRqvFf">コンテンツロードマップ</a></span></p>
   </header>
 
-  <section class="summary" id="summary" aria-labelledby="h-summary">
+  <section class="summary" aria-labelledby="h-summary">
     <h2 id="h-summary">まず押さえること</h2>
     <ul class="bullets">
-      <li><strong>今は大きくお金を入れる段階ではありません．</strong>先に「安定して配信できること」と「誰がお金を払うか」を確かめます．</li>
-      <li><strong>当面のお金は，GPUより権利処理とクラウドの従量課金に使います．</strong>GPUを買うのは，配信の稼働時間が見えてからです．</li>
+      <li><strong>今は大きくお金を入れる段階ではありません．</strong>10/18の初配信（1時間34分）は成功しましたが，売上はまだ0です．先に「週3回の本番を落ちずに回せること」と「誰がいくら払うか」を確かめます．</li>
+      <li><strong>1時間の原価は約1,000円です．</strong>当面は21〜23時の2時間だけ流し，1体あたり月約6万円に抑えます．GPUは買わず，クラウドで回します．</li>
       <li><strong>KSACは今回見送ります．</strong>事務局から「先に研究実績を」と助言を受けました．研究実績を作りながら，1stRoundなど他の資金に時期をずらして複数応募します．</li>
     </ul>
     <div class="deadline-callout">
@@ -310,40 +201,57 @@ footer h2 { font-size: var(--step-2); color: var(--ink); }
     </div>
   </section>
 
-  <section id="now" aria-labelledby="h-now">
+  <section aria-labelledby="h-now">
     <h2 id="h-now">現状の整理</h2>
     <dl class="status-board">
       <dt>技術</dt>
-      <dd>顔生成に実時間の13〜90倍かかります．映像と音声を同時に回すと映像は実時間の2/3しか出ず，遅延が最大25秒まで溜まります．今のGPU（RTX 4000 Ada）の約1.5倍の処理能力が必要です．</dd>
+      <dd>10/18にAWS（g6e.xlarge，L40S）からYouTubeへ初配信しました．1時間34分，落ちずに話し続け，音声と映像の遅れもありませんでした．起動から配信まで一つの命令で15分です．</dd>
+      <dt>費用と売上</dt>
+      <dd>1時間の原価は約1,000円（GPU 400円＋LLM 600円，人件費は別）です．24時間流すと1体で年約880万円かかります．売上はまだ0です．</dd>
       <dt>事業</dt>
-      <dd>事務所向けの月額課金，企業・自治体キャラの運用代行，受付の置き換えなど，候補が並行したままです．「Whatはあるが Howがない」状態です．</dd>
-      <dt>体制</dt>
-      <dd>開発が片岡くんに集中しています．10/16のミーティングで役割分担を決めたところです．</dd>
+      <dd>事業の形は未定です．事務所（自分たちで運用して稼ぐ），キット（道具を売る），運用会社（配信者から運用を請け負う）の3案があります．</dd>
       <dt>権利</dt>
-      <dd>ひろゆき氏の許可は取れましたが，YouTubeデータ（約70時間分）の扱いには懸念が残っています．</dd>
+      <dd>人格と顔はいまはひろゆき氏で，10/7にメールで許諾を得ています．映像生成のAVTR-1には非商用の部品が残っていて，収益化や販売の前に置き換えが必要です．</dd>
+      <dt>体制</dt>
+      <dd>開発が片岡くんに集中しています．役割分担を決めたところです．</dd>
     </dl>
   </section>
 
-  <section id="gates" aria-labelledby="h-gates">
+  <section aria-labelledby="h-pnl">
+    <h2 id="h-pnl">収支の見通し</h2>
+    <p>原価を埋めるのに，1時間にどれだけの投げ銭が要るかの見積もりです．</p>
+    <div class="figures">
+      <div class="fig"><span class="num">1,000<span class="unit">円</span></span><span class="lbl">1時間の原価</span><span class="sub">GPU 400円＋LLM 600円．人件費は別</span></div>
+      <div class="fig"><span class="num">1,400<span class="unit">円</span></span><span class="lbl">要る投げ銭（1時間）</span><span class="sub">YouTubeの場合．TikTokなら約2,000円</span></div>
+      <div class="fig"><span class="num open">?<span class="unit">人</span></span><span class="lbl">要る同時接続</span><span class="sub">1人あたりの投げ銭は，11月の本番で測ります</span></div>
+    </div>
+    <ul class="bullets">
+      <li><strong>1/31の節目「収益化の入口」は，同時接続100人・手取り1時間500円です．</strong></li>
+      <li><strong>YouTubeの収益化には，登録者1,000人と12か月で4,000時間の視聴が必要です．</strong>投げ銭よりメンバーシップの方が合うかも検証します．</li>
+      <li><strong>市場は「見られているのに課金が増えない」状態です．</strong>ライブの視聴は過去最高ですが，投げ銭は伸びていません．最大手のTikTok Liveは数字を公開していないので，要調査です．</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-gates">
     <h2 id="h-gates">お金を入れる4つの関門</h2>
-    <p>関門を通るごとに，入れるお金の額と出し手が変わります．条件はまだ目安なので，ロードマップで具体的な数字に詰めてください．</p>
+    <p>関門を通るごとに，入れるお金の額と出し手が変わります．通過条件は，片岡くんの計画の節目（11/30，1/31，6/30）に合わせています．</p>
     <ol class="stepper">
       <li class="gate is-now">
         <span class="gate-no" aria-hidden="true">1</span>
         <div class="gate-body">
           <div class="gate-head"><h3>技術MVP</h3><span class="gate-when">〜2026年12月</span><span class="now-tag">いまここ</span></div>
           <div class="gate-rows">
-            <span class="k">通過条件</span><span class="v">権利を自前で持つアバターで3時間の連続配信．遅延は数秒以内．計測ログも取れていること</span>
-            <span class="k">資金</span><span class="v">研究費（活性化事業）＋クラウド従量課金．月数万〜十数万円</span>
+            <span class="k">通過条件</span><span class="v">週3回×2時間の本番を12回，落ちず間なく回す（11/30）．計測ログが取れていること</span>
+            <span class="k">資金</span><span class="v">研究費（活性化事業）＋クラウド．2時間の本番なら1体 月約3〜6万円</span>
           </div>
         </div>
       </li>
       <li class="gate">
         <span class="gate-no" aria-hidden="true">2</span>
         <div class="gate-body">
-          <div class="gate-head"><h3>研究実績と需要検証</h3><span class="gate-when">〜2027年3月</span></div>
+          <div class="gate-head"><h3>収益化の入口と研究実績</h3><span class="gate-when">〜2027年3月</span></div>
           <div class="gate-rows">
-            <span class="k">通過条件</span><span class="v">全国大会で発表し，査読付きを1本投稿．払う相手を1つに絞り，ヒアリングか有料PoCを1〜3件</span>
+            <span class="k">通過条件</span><span class="v">同時接続100・手取り1時間500円（1/31）．全国大会で発表し，査読付きを1本投稿．事業の形を3案から決める</span>
             <span class="k">資金</span><span class="v">研究費，共同研究費，採択されれば1stRound・NEPなど．数百万円規模</span>
           </div>
         </div>
@@ -351,9 +259,9 @@ footer h2 { font-size: var(--step-2); color: var(--ink); }
       <li class="gate">
         <span class="gate-no" aria-hidden="true">3</span>
         <div class="gate-body">
-          <div class="gate-head"><h3>会社設立と初の外部資金</h3><span class="gate-when">関門2の後</span></div>
+          <div class="gate-head"><h3>3体の配信と会社設立</h3><span class="gate-when">2027年6月〜</span></div>
           <div class="gate-rows">
-            <span class="k">通過条件</span><span class="v">継続して課金してくれる顧客が複数社</span>
+            <span class="k">通過条件</span><span class="v">3体で配信（6/30）．新しい人物を1週間・5万円で立ち上げられる．継続して払ってくれる顧客が複数</span>
             <span class="k">資金</span><span class="v">創業メンバーの出資，グループ会社から少額，エンジェル，次回のKSAC．〜1,000万円</span>
           </div>
         </div>
@@ -371,23 +279,27 @@ footer h2 { font-size: var(--step-2); color: var(--ink); }
     </ol>
   </section>
 
-  <section id="research" aria-labelledby="h-research">
+  <section aria-labelledby="h-research">
     <h2 id="h-research">研究実績の作り方</h2>
-    <p><strong>配信実験をそのまま研究実験にします．</strong>HITLの主張（1人で複数キャラを回せる，人の介入でキャラが良くなる）を数字で示せるよう，最初から次のログを取ります．こうすれば，関門1の技術MVPと研究実績づくりが同じ作業になります．</p>
-    <ul class="log-spec">
-      <li><span class="tag">運用</span>オペレーター1人あたりの同時運用キャラ数</li>
-      <li><span class="tag">介入</span>介入の回数とタイミング</li>
-      <li><span class="tag">視聴</span>介入前後の視聴維持率とコメント数</li>
-      <li><span class="tag">品質</span>配信の遅延</li>
-    </ul>
+    <p><strong>配信の本番をそのまま研究実験にします．</strong>研究の柱は「3つのHuman in the Loop」です．本番のたびに，人が渡したものとAIが返したものをログに残します．こうすれば，関門1の本番と研究実績づくりが同じ作業になります．</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">誰が</th><th scope="col">人が渡すもの</th><th scope="col">AIが返すもの</th><th scope="col">問い</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">ロールモデル</th><td>配信の前に，人格の素材となる記録</td><td>本番で何が受けたか</td><td>人格はどう立つか．元の人物は複数人でもよいか</td></tr>
+          <tr><th scope="row">オペレーター</th><td>配信中に，止める・微調整する</td><td>止めた回数と調整のログ</td><td>完全な自動運転に足りないものは何か</td></tr>
+          <tr><th scope="row">視聴者</th><td>配信中に，コメントと投げ銭</td><td>読み上げと話題の変化</td><td>Loopの速さは何に効くか</td></tr>
+        </tbody>
+      </table>
+    </div>
     <ul class="bullets">
-      <li><strong>最短の発表先は情報処理学会の全国大会（2027年3月）です．</strong>前回は講演申込が12月5日，原稿が1月9日の締切でした．次回も同じ時期なら，12月上旬の申込が目標です．原稿は2ページなので，関門1の結果で間に合います．</li>
+      <li><strong>最短の発表先は情報処理学会の全国大会（2027年3月）です．</strong>前回は講演申込が12月5日，原稿が1月9日の締切でした．次回も同じ時期なら，12月上旬の申込が目標です．原稿は2ページなので，11月の本番のデータで間に合います．</li>
       <li><strong>その次に査読付きを1本出します．</strong>国内シンポジウムか，国際会議のポスター／デモが候補です．</li>
       <li><strong>確認しておくこと：</strong>KSACが求める「実績」の水準と次回の公募時期（事務局に確認）．視聴者データを研究に使う場合の研究倫理審査の要否．</li>
     </ul>
   </section>
 
-  <section id="calendar" aria-labelledby="h-calendar">
+  <section aria-labelledby="h-calendar">
     <h2 id="h-calendar">締切カレンダー</h2>
     <p>採択率はどれも高くないので，1本に賭けずに時期をずらして複数に出します．「見込み」は前回の日程からの推定なので，応募前に公式ページで確認してください．</p>
     <ol class="ledger">
@@ -478,42 +390,41 @@ footer h2 { font-size: var(--step-2); color: var(--ink); }
       <div>
         <h3>応募の負担を減らすには</h3>
         <ul class="bullets">
-          <li>申請書は<strong>1本のマスター資料</strong>から作り回します．課題，技術（HITL），チーム，マイルストン，資金使途の構成はどの制度もほぼ同じです．</li>
+          <li>申請書は<strong>1本のマスター資料</strong>から作り回します．片岡くんの計画資料「AI配信者」がそのまま土台になります．</li>
           <li>同じ経費を複数の制度で重ねて受け取れないのが一般的です．採択が重なったときの扱いは各制度で確認します．</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <section id="spend" aria-labelledby="h-spend">
+  <section aria-labelledby="h-spend">
     <h2 id="h-spend">当面のお金の使い方</h2>
-    <p>外部資金が付くまでは，研究費の範囲（月数万〜十数万円）に抑えます．使う順番は次のとおりです．</p>
+    <p>外部資金が付くまでは，研究費の範囲に抑えます．使う順番は次のとおりです．</p>
     <ol class="priority">
-      <li><div><strong>権利処理：</strong>アバターと声の購入（10万円程度）を最優先にします．ひろゆき氏の許可は，商用利用・二次利用・期間の範囲を書面で確認します．</div></li>
-      <li><div><strong>クラウドの従量課金：</strong>配信実験の時間だけ払います．</div></li>
+      <li><div><strong>権利処理：</strong>AVTR-1の非商用部品の置き換え先を調べます．ひろゆき氏の許諾は，商用利用・二次利用・期間の範囲を書面で確認します．2体目以降は，権利を自前で持てる人物（架空の人物，絵，許諾を得た配信者）にします．</div></li>
+      <li><div><strong>配信の原価：</strong>21〜23時の2時間だけ流します．原価の6割はLLMなので，LLMの切り替えとスポットインスタンスで下げる余地があります．</div></li>
       <li><div><strong>人：</strong>有償の業務委託は資金が付いてからにします．それまでは卒論・修論のテーマとして関わってもらう形にします．</div></li>
-      <li><div><strong>集客実験：</strong>TikTokアカウントなど．目的は，同時接続数・視聴維持率・フォロワー推移の数字を取ることです．</div></li>
+      <li><div><strong>集客：</strong>広告は使わず，ショートとSNSで人を集めます．</div></li>
     </ol>
 
-    <h3>クラウド費の目安（L40S搭載のAWS g6e.xlarge）</h3>
+    <h3>1体あたりの配信の費用</h3>
     <div class="table-wrap">
       <table>
-        <thead><tr><th scope="col">使い方</th><th scope="col">月額の目安</th></tr></thead>
+        <thead><tr><th scope="col">流し方</th><th scope="col">費用の目安</th></tr></thead>
         <tbody>
-          <tr><td>24時間配信（オンデマンド）</td><td class="num">20〜30万円</td></tr>
-          <tr><td>1日2〜3時間の配信</td><td class="num">2〜3万円</td></tr>
-          <tr><td>スポットインスタンス</td><td class="num">上の約1/4〜1/2</td></tr>
+          <tr><td>週3回×2時間（11月の本番）</td><td class="num">月約2.6万円</td></tr>
+          <tr><td>毎日2時間（21〜23時）</td><td class="num">月約6万円</td></tr>
+          <tr><td>24時間</td><td class="num">年約880万円</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="section-note">1ドル150円換算．オンデマンドは米国東部で1時間約1.86ドル，東京で約2.7ドル．スポットは1時間0.43〜0.87ドル程度ですが，途中で止まるリスクがあります．</p>
+    <p class="section-note">1時間約1,000円（GPU 400円＋LLM 600円，人件費は別）で計算．片岡くんの実測です．</p>
     <ul class="bullets">
-      <li><strong>100万円のGPUを買う場合</strong>，元が取れるのは1日8時間前後の配信が1年続くときです．稼働時間が見えるまでは買いません．</li>
-      <li>買うなら，<strong>映像単体で実時間の2倍以上</strong>の性能が出るかを先に確認します．</li>
+      <li><strong>GPUは買いません．</strong>GPU代は1時間400円なので，100万円のGPUの元を取るには1日7時間前後の配信を1年続ける必要があります．</li>
     </ul>
   </section>
 
-  <section id="group" aria-labelledby="h-group">
+  <section aria-labelledby="h-group">
     <h2 id="h-group">グループ会社（AGRI-PASS・manamu）との連携</h2>
     <ul class="bullets">
       <li><strong>現金での出資は会社設立（関門3）まで待ちます．</strong>入れる場合も少額にし，J-KISSのような転換型にして評価額の議論を先送りします．</li>
@@ -524,37 +435,39 @@ footer h2 { font-size: var(--step-2); color: var(--ink); }
     </ul>
   </section>
 
-  <section id="edge" aria-labelledby="h-edge">
-    <h2 id="h-edge">勝ち筋</h2>
-    <p><strong>差別化をGPUコストに置きません．</strong>インフラの安さは時間とともに真似されます．堀になるのは，1人のオペレーターが複数キャラを同時に回し，人の介入データでキャラが育つHITLの仕組みです．研究のど真ん中なので，論文と事業を同じ方向に進められます．</p>
-    <div class="floors">
-      <div class="floor">
-        <span class="lvl">2階：売上</span>
-        <div>企業・自治体の公式キャラ運用や受付など，払う理由がはっきりしたB2Bで立てます．</div>
-      </div>
-      <div class="floor">
-        <span class="lvl">1階：配信</span>
-        <div>エンタメ配信は，ショーケース兼データ収集の場にします．エンタメ単独でも伸びれば大きいですが，OSSのAITuberや既存勢と品質で競うことになり，収益化までが遠くなります．</div>
-      </div>
+  <section aria-labelledby="h-edge">
+    <h2 id="h-edge">事業の形と勝ち筋</h2>
+    <p>事業の形は，2027年1〜3月に3案から決めます．判断材料は，11月の本番で測る投げ銭と同時接続です．</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">案</th><th scope="col">中身</th><th scope="col">稼ぎ方</th><th scope="col">決める前に確かめること</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">事務所</th><td>自分たちで運用して稼ぐ</td><td>投げ銭，メンバーシップ，広告</td><td>1時間1,400円の投げ銭が届くか</td></tr>
+          <tr><th scope="row">キット</th><td>道具を売り，運用はしない</td><td>販売，利用料</td><td>非商用部品の置き換え．新しい人物を1週間で作れるか</td></tr>
+          <tr><th scope="row">運用会社</th><td>配信者から運用を請け負う</td><td>運用の委託料</td><td>ファンの少ない配信者や法人に，払う理由があるか</td></tr>
+        </tbody>
+      </table>
     </div>
+    <p><strong>差別化をGPUコストに置きません．</strong>インフラの安さは時間とともに真似されます．堀になるのは，人格の素材から人物を立ち上げる手順と，人の介入データでキャラが育つHITLの仕組みです．どの案を選んでも，自分たちの配信は見せ場とデータ集めの場になります．</p>
   </section>
 
-  <section id="actions" aria-labelledby="h-actions">
+  <section aria-labelledby="h-actions">
     <h2 id="h-actions">決めること・次のアクション</h2>
     <p class="section-note">担当は案です．次回のミーティングで確定させてください．</p>
     <ol class="actions">
       <li class="action"><span class="who">全員</span><span class="task">1stRoundに出すかを決める（＝1年以内に起業すると約束できるか）</span><span class="due">11月上旬</span></li>
-      <li class="action"><span class="who">佐藤くん・金谷くん</span><span class="task">この関門表をロードマップのたたき台にし，各関門の通過条件を数字に落とす</span><span class="due">次回MTG</span></li>
-      <li class="action"><span class="who">片岡くん・國領さん</span><span class="task">配信実験に計測ログ（運用・介入・視聴・品質）を組み込む</span><span class="due">12月上旬</span></li>
-      <li class="action"><span class="who">金谷くん</span><span class="task">クラウド費を実測する（稼働時間×単価）．スポット運用も試す</span><span class="due">11月中</span></li>
-      <li class="action"><span class="who">小板</span><span class="task">KSAC事務局に実績の水準と次回時期を確認．1stRoundの学内窓口に相談．権利関係を顧問弁護士に相談</span><span class="due">11月上旬</span></li>
+      <li class="action"><span class="who">片岡くん</span><span class="task">本番の配信に，3つのHITLの計測ログを組み込む</span><span class="due">11月中</span></li>
+      <li class="action"><span class="who">金谷くん</span><span class="task">1時間約1,000円の原価を下げる案を出す（LLMの切り替え，スポット）</span><span class="due">11月中</span></li>
+      <li class="action"><span class="who">川崎さん</span><span class="task">原価と投げ銭の記録を始める</span><span class="due">11月の本番から</span></li>
+      <li class="action"><span class="who">佐藤くん・金谷くん</span><span class="task">この関門表を事業計画のたたき台にし，各関門の数字を詰める</span><span class="due">次回MTG</span></li>
+      <li class="action"><span class="who">小板</span><span class="task">KSAC事務局に実績の水準と次回時期を確認．1stRoundの学内窓口に相談．AVTR-1の非商用部品を含む権利関係を顧問弁護士に相談</span><span class="due">11月上旬</span></li>
       <li class="action"><span class="who">全員</span><span class="task">全国大会の原稿担当を決めて申し込む</span><span class="due">12月上旬</span></li>
     </ol>
   </section>
 
   <footer>
     <h2>注意と参照</h2>
-    <p>締切と金額は，2026年10月24日時点の公開情報と前回の実績をもとにしています．応募前に必ず公式ページで確認してください．出資の形式や利益相反の手続きは，顧問の専門家と確認します．</p>
+    <p>締切と金額は，2026年10月24日時点の公開情報と前回の実績をもとにしています．応募前に必ず公式ページで確認してください．原価・節目・市場の数字は，片岡くんの計画資料「AI配信者」（2026年10月）によります．出資の形式や利益相反の手続きは，顧問の専門家と確認します．</p>
     <ul class="refs">
       <li><a href="https://www.tus.ac.jp/ura/1stround-20261009stratup/">1stRound 第16回 募集案内</a></li>
       <li><a href="https://www.shibaura-it.ac.jp/assets/shibaura_press.pdf">1stRound 採択実績（芝浦工業大学 発表資料）</a></li>
@@ -562,10 +475,8 @@ footer h2 { font-size: var(--step-2); color: var(--ink); }
       <li><a href="https://www.ipa.go.jp/jinzai/mitou/about.html">未踏事業について（IPA）</a></li>
       <li><a href="https://www.dreamnews.jp/press/0000331583/">情報処理学会 第88回全国大会 講演募集</a></li>
       <li><a href="https://www.city.kyoto.lg.jp/sankan/cmsfiles/contents/0000354/354560/pressrelease.pdf">IMPACT FLOW KYOTO 2026-2027 報道発表</a></li>
-      <li><a href="https://compute.doit.com/spot/us-east-1/g6e.xlarge">g6e.xlarge 料金（オンデマンド・スポット）</a></li>
-      <li><a href="https://vpsranking.com/gpu/fine-tuning/">GPUクラウド料金比較（東京リージョン）</a></li>
     </ul>
-    <p>チャンネル内の議論：10/4，10/9，10/16のハドル議事録と各スレッド．</p>
+    <p>チャンネル内の議論：10/4，10/9，10/16のハドル議事録と各スレッド，10/20の計画資料「AI配信者」．</p>
   </footer>
 
 </div>
